@@ -12,7 +12,12 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cryptologos.cc",
       },
+      {
+        protocol: "https",
+        hostname: "coin-images.coingecko.com",
+      },
     ],
+    dangerouslyAllowLocalIP: true,
   },
 };
 

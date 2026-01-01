@@ -1,14 +1,11 @@
-import CoinOverview from "@/components/home/CoinOverview";
+import { fetcher } from "@/lib/coingecko.actions";
 import { cn } from "@/lib/utils";
+
 import { TrendingDown, TrendingUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import TrendingCoins from "@/components/home/TrendingCoins";
-import { Suspense } from "react";
-import {
-  CoinOverviewFallback,
-  TrendingCoinsFallback,
-} from "@/components/home/fallback";
+import Datatable from "../Datatable";
+import { mockData } from "@/mock";
 
 const columns: DataTableColumn<TrendingCoin>[] = [
   {
@@ -58,22 +55,27 @@ const columns: DataTableColumn<TrendingCoin>[] = [
   },
 ];
 
-const page = () => {
+const TrendingCoins = async () => {
+  const trendingCoins = await fetcher<{ coins: TrendingCoin[] }>(
+    "/search/trending",
+    undefined,
+    300,
+  );
   return (
-    <main className="main-container">
-      <section className="home-grid">
-        <Suspense fallback={<CoinOverviewFallback />}>
-          <CoinOverview />
-        </Suspense>
-        <Suspense fallback={<TrendingCoinsFallback />}>
-          <TrendingCoins />
-        </Suspense>
-      </section>
-      <section className="mt-7 w-full space-y-4">
-        <p>Categories</p>
-      </section>
-    </main>
+    <div id="trending-coins">
+      <h4>Trending Coins</h4>
+      <div id="trending-coins">
+        <Datatable
+          columns={columns}
+          data={trendingCoins.coins.slice(0, 6) || []}
+          rowKey={(coin) => coin.item.id}
+          tableClassName="trending-coins-table"
+          headerCellClassName="py-3!"
+          bodyCellClassName="py-2!"
+        />
+      </div>
+    </div>
   );
 };
 
-export default page;
+export default TrendingCoins;
