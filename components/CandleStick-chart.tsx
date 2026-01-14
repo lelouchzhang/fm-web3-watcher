@@ -131,6 +131,7 @@ const CandleStickChart = ({
           {PERIOD_BUTTONS.map(({ value, label }) => (
             <button
               key={value}
+              type="button"
               className={
                 period === value ? "config-button-active" : "config-button"
               }
