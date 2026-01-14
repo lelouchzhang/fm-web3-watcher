@@ -30,6 +30,8 @@ const Datatable = <T,>({
               key={i}
               className={cn(
                 "bg-dark-400 py-4 text-purple-100 first:pl-5 last:pr-5",
+                headerCellClassName,
+                column.headClassName,
               )}
             >
               {column.header}
@@ -47,7 +49,14 @@ const Datatable = <T,>({
             )}
           >
             {columns.map((column, ci) => (
-              <TableCell key={ci} className={cn("py-4 first:pl-5 last:pr-5")}>
+              <TableCell
+                key={ci}
+                className={cn(
+                  "py-4 first:pl-5 last:pr-5",
+                  bodyCellClassName,
+                  column.cellClassName,
+                )}
+              >
                 {column.cell(row, ci)}
               </TableCell>
             ))}
