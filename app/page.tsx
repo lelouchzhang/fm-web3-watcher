@@ -6,9 +6,11 @@ import Link from "next/link";
 import TrendingCoins from "@/components/home/TrendingCoins";
 import { Suspense } from "react";
 import {
+  CategoriesFallback,
   CoinOverviewFallback,
   TrendingCoinsFallback,
 } from "@/components/home/fallback";
+import Categories from "@/components/home/Categories";
 
 const columns: DataTableColumn<TrendingCoin>[] = [
   {
@@ -70,7 +72,9 @@ const page = () => {
         </Suspense>
       </section>
       <section className="mt-7 w-full space-y-4">
-        <p>Categories</p>
+        <Suspense fallback={<CategoriesFallback />}>
+          <Categories />
+        </Suspense>
       </section>
     </main>
   );
