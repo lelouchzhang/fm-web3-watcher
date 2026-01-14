@@ -927,25 +927,32 @@
 }
 
 /* Custom Scrollbar Styles */
+/* 整个滚动条 */
 .custom-scrollbar::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
+/* 滚动条轨道（背景） */
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
 
+/* 滚动条滑块（可拖动部分） */
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #1e2833;
   border-radius: 8px;
 }
 
+/* 滑块悬停状态 */
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #171a34;
 }
 
-/* Table Custom Scrollbar */
+/* 对表格容器的特殊处理 */
+/*
+ * 当custom-scrollbar内具有data-slot="table-container"属性时应用
+ */
 .custom-scrollbar [data-slot="table-container"] {
   overflow-y: auto;
 }

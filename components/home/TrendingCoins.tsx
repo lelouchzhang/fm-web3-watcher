@@ -1,5 +1,5 @@
 import { fetcher } from "@/lib/coingecko.actions";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 
 import { TrendingDown, TrendingUp } from "lucide-react";
 import Image from "next/image";
@@ -49,9 +49,7 @@ const columns: DataTableColumn<TrendingCoin>[] = [
   {
     header: "Price",
     cellClassName: "price-cell",
-    cell: (coin) => {
-      return coin.item.data.price;
-    },
+    cell: (coin) => formatCurrency(coin.item.data.price),
   },
 ];
 
@@ -64,16 +62,14 @@ const TrendingCoins = async () => {
   return (
     <div id="trending-coins">
       <h4>Trending Coins</h4>
-      <div id="trending-coins">
-        <Datatable
-          columns={columns}
-          data={trendingCoins.coins.slice(0, 6) || []}
-          rowKey={(coin) => coin.item.id}
-          tableClassName="trending-coins-table"
-          headerCellClassName="py-3!"
-          bodyCellClassName="py-2!"
-        />
-      </div>
+      <Datatable
+        columns={columns}
+        data={trendingCoins.coins.slice(0, 6) || []}
+        rowKey={(coin) => coin.item.id}
+        tableClassName="trending-coins-table"
+        headerCellClassName="py-3!"
+        bodyCellClassName="py-2!"
+      />
     </div>
   );
 };
