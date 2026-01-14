@@ -1,5 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
-// import { Time } from "lightweight-charts";
+import { Time } from "lightweight-charts";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -70,16 +70,29 @@ export function timeAgo(date: string | number | Date): string {
 }
 
 export function convertOHLCData(data: OHLCData[]) {
-  return data.map((d) => ({
-    // time: d[0] as Time, // ensure seconds, not ms
-    open: d[1],
-    high: d[2],
-    low: d[3],
-    close: d[4],
-  }));
-  // .filter(
-  //   (item, index, arr) => index === 0 || item.time !== arr[index - 1].time,
-  // );
+  if (!data || !Array.isArray(data)) {
+    console.warn("Invalid OHLC data format:", data);
+    return [];
+  }
+  return data
+    .map((d) => {
+      let timestamp = d[0];
+      // 判断时间戳是秒级还是毫秒级，并统一转换为秒级
+      // 毫秒级时间戳通常大于10^10，秒级小于10^10
+      if (timestamp > 10000000000) {
+        timestamp = Math.floor(timestamp / 1000); // ensure seconds, not ms
+      }
+      return {
+        time: timestamp as Time,
+        open: d[1],
+        high: d[2],
+        low: d[3],
+        close: d[4],
+      };
+    })
+    .filter(
+      (item, index, arr) => index === 0 || item.time !== arr[index - 1].time,
+    );
 }
 
 export const ELLIPSIS = "ellipsis" as const;
