@@ -22,6 +22,7 @@ const Coins = async ({ searchParams }: NextPageProps) => {
 
   // pagination
   const hasOneMorePage = coins.length === perPage;
+  // CoinGecko API 不返回总条目数，使用估算值提供分页导航
   const estimatedTotalPages =
     currentPage >= 100 ? Math.ceil(currentPage / 100) * 100 + 100 : 100;
 
@@ -57,7 +58,7 @@ const Coins = async ({ searchParams }: NextPageProps) => {
       header: "24h Change",
       cellClassName: "change-cell",
       cell: (coin) => {
-        const isTrendingUp = coin.price_change_percentage_24h > 0;
+        const isTrendingUp = coin.price_change_percentage_24h ?? 0 > 0;
 
         return (
           <span

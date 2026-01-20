@@ -19,7 +19,7 @@ const Categories = async () => {
       cellClassName: "top-gainers-cell",
       cell: (categories) => {
         return categories.top_3_coins.map((coin) => (
-          <Image src={coin} alt={coin} key={coin} width={28} height={28} />
+          <Image src={coin} alt="" key={coin} width={28} height={28} />
         ));
       },
     },

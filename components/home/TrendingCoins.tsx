@@ -26,7 +26,7 @@ const columns: DataTableColumn<TrendingCoin>[] = [
     cellClassName: "change-cell",
     cell: (coin) => {
       const item = coin.item;
-      const isTrendingUp = item.data.price_change_percentage_24h.usd > 0;
+      const isTrendingUp = item.data.price_change_percentage_24h.usd ?? 0 > 0;
       return (
         <div
           className={cn(
