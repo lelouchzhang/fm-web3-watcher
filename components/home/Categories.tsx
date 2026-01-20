@@ -27,7 +27,7 @@ const Categories = async () => {
       header: "24h Change",
       cellClassName: "change-header-cell",
       cell: (categories) => {
-        const isTrendingUp = categories.market_cap_change_24h > 0;
+        const isTrendingUp = (categories.market_cap_change_24h ?? 0) > 0;
         return (
           <div
             className={cn(
