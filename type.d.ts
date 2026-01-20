@@ -320,7 +320,7 @@ type PaginationLinkProps = {
 interface Pagination {
   currentPage: number;
   totalPages: number;
-  hasMorePages: boolean;
+  hasOneMorePages: boolean;
 }
 
 interface HeaderProps {
