@@ -92,7 +92,7 @@ const Coins = async ({ searchParams }: NextPageProps) => {
         <CoinPagination
           currentPage={currentPage}
           totalPages={estimatedTotalPages}
-          hasOneMorePages={hasOneMorePage}
+          hasMorePages={hasOneMorePage}
         />
       </div>
     </main>

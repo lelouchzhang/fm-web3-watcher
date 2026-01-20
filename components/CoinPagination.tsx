@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 const CoinPagination = ({
   currentPage,
   totalPages,
-  hasOneMorePages,
+  hasMorePages,
 }: Pagination) => {
   const router = useRouter();
 
@@ -22,7 +22,7 @@ const CoinPagination = ({
   };
 
   const pageNumbers = buildPageNumbers(currentPage, totalPages);
-  const isLastPage = !hasOneMorePages && currentPage === totalPages;
+  const isLastPage = !hasMorePages && currentPage === totalPages;
 
   return (
     <Pagination id="coins-pagination">
